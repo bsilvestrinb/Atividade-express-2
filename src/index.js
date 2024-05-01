@@ -205,15 +205,13 @@ app.post("/signup", async(request,response)=>{
 
   const senhaCriptografada = await bcrypt.hash(senhaDigitada, 10)
 
-  let novaUsuario ={
+  let novoUsuario ={
     id : proximoUsuario,
     email : data.email, 
     senhaDigitada :senhaCriptografada
   }
 
-  usuarios.push(novaUsuario)
-
-  console.log(usuarios)
+  usuarios.push(novoUsuario)
 
   proximoUsuario++
 
@@ -248,6 +246,8 @@ app.post("/login", async(request, response)=> {
   console.log(usuarioLogin)
 
   const senhaMatch = await bcrypt.compare(senha, usuarioLogin.senhaDigitada)
+
+  console.log(senhaMatch)
 
   if(!senhaMatch){
     response
